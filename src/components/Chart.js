@@ -14,7 +14,7 @@ const ChartComponent = () => {
     datasets: [
       {
         data: chartData.data.series,
-        backgroundColor: ['#FF6384', '#FF9F40', '#4BC0C0'], // 색상: 빨강, 주황, 녹색
+        backgroundColor: ['#FF6384', '#FF9F40', '#4BC0C0'], // 빨강, 주황, 녹색
         hoverBackgroundColor: ['#FF6384', '#FF9F40', '#4BC0C0'],
       },
     ],

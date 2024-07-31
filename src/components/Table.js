@@ -7,14 +7,18 @@ const TableComponent = () => {
   const [filter, setFilter] = useState('');
   const [filteredData, setFilteredData] = useState(dataFile.data); 
 
+  // 필터 상태가 변경될 때마다 필터링된 데이트를 업데이트
   useEffect(() => {
     if (filter) {
+      //필터가 설정된 경우 주소에 필터 문자열이 포함된 데이터만 설정
       setFilteredData(dataFile.data.filter(row => row.address.includes(filter)));
     } else {
+      //필터가 설정되지 않은 경우 전체 데이터를 설정
       setFilteredData(dataFile.data);
     }
   }, [filter]);
 
+  //테이블 정의
   const columns = React.useMemo(
     () => [
       {
@@ -37,6 +41,7 @@ const TableComponent = () => {
     []
   );
 
+  //테이블 속성 가져오기
   const {
     getTableProps,
     getTableBodyProps,
