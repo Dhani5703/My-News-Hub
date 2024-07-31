@@ -1,7 +1,7 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import chartData from '../chart.json';
-import './Chart.css';
+import chartData from '../../src/datas/chart.json';
+import '../styles/Chart.css';
 
 //필요한 요소 등록
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';

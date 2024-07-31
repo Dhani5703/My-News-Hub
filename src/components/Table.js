@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTable, useSortBy } from 'react-table';
-import dataFile from '../table.json'; 
-import './Table.css';
+import dataFile from '../../src/datas/table.json'; 
+import '../styles/Table.css';
 
 const TableComponent = () => {
   const [filter, setFilter] = useState('');
