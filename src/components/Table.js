@@ -66,7 +66,7 @@ const TableComponent = () => {
         <label htmlFor="region">지역:</label>
         <select id="region" onChange={(e) => setFilter(e.target.value)}>
           <option value="">전체</option>
-          <option value="서울특별`시">서울특별시</option>
+          <option value="서울특별시">서울특별시</option>
           <option value="경기도">경기도</option>
           <option value="부산광역시">부산광역시</option>
         </select>
