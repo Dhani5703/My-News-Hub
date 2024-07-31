@@ -5,6 +5,7 @@
   height: 50vh;
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 150px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -12,7 +13,9 @@
 }
 
 .logo {
+  margin-top: 10px;
   margin-bottom: 20px;
+  margin-left:30px;
 }
 
 .logo img {
