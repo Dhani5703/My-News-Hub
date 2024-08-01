@@ -7,10 +7,11 @@ const Sidebar = () => {
     <nav className="sidebar">
       <ul>
         <li>
-          <NavLink to="/table" activeClassName="active">테이블</NavLink>
+          {/* <NavLink to="/table" activeClassName="active">테이블</NavLink> */}
+          <NavLink to="/talbe" className={(navData) => (navData.isActive ? "active-style" : 'none')}>테이블</NavLink>
         </li>
         <li>
-          <NavLink to="/chart" activeClassName="active">차트</NavLink>
+        <NavLink to="/cahrt" className={(navData) => (navData.isActive ? "active-style" : 'none')}>차트</NavLink>
         </li>
       </ul>
     </nav>

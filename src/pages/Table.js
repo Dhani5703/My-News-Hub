@@ -77,32 +77,48 @@ const TableComponent = () => {
         </select>
       </div>
       <table {...getTableProps()} className="table">
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  {column.id === 'age' && (
-                    <span>
-                     {sortBy.length > 0 && sortBy[0].id === column.id ? (
-                       sortBy[0].desc ? ' 🔽' : ' 🔼'
-                      ) : ' 🔽'}
-                    </span>
-                  )}
-                </th>
-              ))}
+      <thead>
+        {headerGroups.map(headerGroup => {
+          // 분리된 key prop
+          const { key, ...headerGroupProps } = headerGroup.getHeaderGroupProps();
+          return (
+            <tr key={key} {...headerGroupProps}>
+              {headerGroup.headers.map(column => {
+                // 분리된 key prop
+                const { key, ...columnProps } = column.getHeaderProps(column.getSortByToggleProps());
+                return (
+                  <th key={key} {...columnProps}>
+                    {column.render('Header')}
+                    {column.id === 'age' && (
+                      <span>
+                        {sortBy.length > 0 && sortBy[0].id === column.id ? (
+                          sortBy[0].desc ? ' 🔽' : ' 🔼'
+                        ) : ' 🔽'}
+                      </span>
+                    )}
+                  </th>
+                );
+              })}
             </tr>
-          ))}
-        </thead>
+          );
+        })}
+      </thead>
         <tbody {...getTableBodyProps()}>
           {rows.map(row => {
             prepareRow(row);
+            // 분리된 key prop
+            const { key, ...rowProps } = row.getRowProps();
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                ))}
+              <tr key={key} {...rowProps}>
+                {row.cells.map(cell => {
+                  // 분리된 key prop
+                  const { key, ...cellProps } = cell.getCellProps();
+                  return (
+                    <td key={key} {...cellProps}>
+                      {cell.render('Cell')}
+                    </td>
+                  );
+                })}
               </tr>
             );
           })}
