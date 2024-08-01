@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
-import Layout from './pages/Layout';
-import Table from './components/Table';
-import Chart from './components/Chart';
+import Login from './pages/Login';
+import Layout from './components/Layout';
+import Table from './pages/Table';
+import Chart from './pages/Chart';
 
 const App = () => {
   return (
