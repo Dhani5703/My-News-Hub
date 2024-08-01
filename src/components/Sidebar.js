@@ -8,10 +8,10 @@ const Sidebar = () => {
       <ul>
         <li>
           {/* <NavLink to="/table" activeClassName="active">테이블</NavLink> */}
-          <NavLink to="/talbe" className={(navData) => (navData.isActive ? "active-style" : 'none')}>테이블</NavLink>
+          <NavLink to="/table" className={(navData) => (navData.isActive ? "active-style" : 'none')}>테이블</NavLink>
         </li>
         <li>
-        <NavLink to="/cahrt" className={(navData) => (navData.isActive ? "active-style" : 'none')}>차트</NavLink>
+        <NavLink to="/chart" className={(navData) => (navData.isActive ? "active-style" : 'none')}>차트</NavLink>
         </li>
       </ul>
     </nav>
