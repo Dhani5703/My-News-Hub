@@ -36,6 +36,7 @@ const Login = () => {
     }
   };
 
+  //페이지 로드시 로컬 스토리지에서 이메일 가져오기
   useEffect(() => {
     const savedEmail = localStorage.getItem('email');
     if(savedEmail) {
@@ -43,11 +44,32 @@ const Login = () => {
     }
   }, []);
 
-  const handleLogin = () => {
-    // 이메일을 로컬 스토리지에 저장
-    localStorage.setItem('email', email);
-    // 뉴스 페이지로 이동
-    window.location.href = '/news';
+  const handleLogin = async () => {
+    // 로그인 요청 보내기
+    try {
+      const response = await fetch('https://fa6e5082-57ca-4bc2-b453-f9ba3f1bd89c.mock.pstmn.io/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if(response.ok){
+        localStorage.setItem('savedEmail',email); //로그인 성공시 아이디를 로컬스토리지에 저장한다.
+        // localStorage.setItem('nickname', data.nickname); //로그인 성공시 닉네임을 로컬스토리지에 저장한다.
+        //각 페이지마다 통신해서 닉네임, 이메일 각각 얻어오는중 -> 전역상태 라이브러리 사용해서 컴포넌트 관계 구현하기!?
+        alert('로그인 성공!');
+        navigate('/news'); //
+      } else {
+        alert('로그인 실패!');
+      }
+      // window.location.href = '/news';
+    } catch (error) {
+      alert('로그인중 에러가 발생했습니다.');
+    }
   };
 
 
