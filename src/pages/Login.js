@@ -54,12 +54,11 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await response.json();
 
       if(response.ok){
         localStorage.setItem('savedEmail',email); //로그인 성공시 아이디를 로컬스토리지에 저장한다.
-        // localStorage.setItem('nickname', data.nickname); //로그인 성공시 닉네임을 로컬스토리지에 저장한다.
+        localStorage.setItem('nickname', data.data); //로그인 성공시 닉네임을 로컬스토리지에 저장한다.
         //각 페이지마다 통신해서 닉네임, 이메일 각각 얻어오는중 -> 전역상태 라이브러리 사용해서 컴포넌트 관계 구현하기!?
         alert('로그인 성공!');
         navigate('/news'); //
