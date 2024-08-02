@@ -1,18 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
-import Sidebar from './Sidebar';
 import '../../src/styles/Layout.css';
 
 const Layout = () => {
   return (
     <div className="layout">
-      <Header />
+      <Header/>
       <div className="main-content">
-        <Sidebar />
-        <div className="content">
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );

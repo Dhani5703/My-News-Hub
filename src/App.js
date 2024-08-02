@@ -2,8 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import Layout from './components/Layout';
-import Table from './pages/Table';
-import Chart from './pages/Chart';
+import News from './pages/News';
 
 const App = () => {
   return (
@@ -11,8 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route element={<Layout />}>
-          <Route path="/table" element={<Table />} />
-          <Route path="/chart" element={<Chart />} />
+          <Route path="/news" element={<News />} />
         </Route>
       </Routes>
     </Router>

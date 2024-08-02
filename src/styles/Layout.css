@@ -17,38 +17,3 @@
     max-width: 100px;
   }
   
-  .main-content {
-    display: flex;
-    flex: 1;
-  }
-  
-  .sidebar {
-    width: 200px;
-    background-color: #f8f8f8;
-    border-right: 1px solid #ccc;
-    padding: 20px;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .sidebar a.active {
-    font-weight: bold;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 20px;
-  }
-  

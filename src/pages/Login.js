@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../src/styles/Login.css';
 import logo from '../assets/logo.png'
@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   //이메일 형식으로 유효성 체크
   const validateEmail = (email) => { 
@@ -30,11 +30,26 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
-      navigate('/table');
+      navigate('/news');
     } else {
       alert('이메일 형식이 올바르지 않습니다.');
     }
   };
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('email');
+    if(savedEmail) {
+      setEmail(savedEmail);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    // 이메일을 로컬 스토리지에 저장
+    localStorage.setItem('email', email);
+    // 뉴스 페이지로 이동
+    window.location.href = '/news';
+  };
+
 
   return (
     <div className="login-container">
@@ -62,7 +77,7 @@ const Login = () => {
             onChange={handlePasswordChange}
           />
         </div>
-        <button type="submit" disabled={!email || !password}>로그인</button> {/* 이메일 또는 비밀번호가 비어 있는 경우 로그인 버튼 비활성화 */}
+        <button type="submit" onClick={handleLogin} disabled={!email || !password}>로그인</button> {/* 이메일 또는 비밀번호가 비어 있는 경우 로그인 버튼 비활성화 */}
       </form>
     </div>
   );
