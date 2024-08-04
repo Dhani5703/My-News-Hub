@@ -18,6 +18,7 @@ const NewsPage = () => {
           headers: {
             'Authorization': `Bearer ${apiKey}`
           },
+          //api key는 원래 헤더로??
           params: {
             q: 'Apple',
             from: date,
@@ -45,6 +46,8 @@ const NewsPage = () => {
     setPage(newPage);
   };
 
+
+  //레이아웃, css다듬기
   return (
     <div>
       <main>
