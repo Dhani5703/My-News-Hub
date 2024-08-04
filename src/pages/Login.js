@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../store/actions/userActions';
+
 import '../../src/styles/Login.css';
 import logo from '../assets/logo.png'
 
@@ -7,7 +11,8 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const dispatch = useDispatch(); 
 
   //이메일 형식으로 유효성 체크
   const validateEmail = (email) => { 
@@ -54,16 +59,19 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
+
       const data = await response.json();
 
       if(response.ok){
         localStorage.setItem('savedEmail',email); //로그인 성공시 아이디를 로컬스토리지에 저장한다.
-        localStorage.setItem('nickname', data.data); //로그인 성공시 닉네임을 로컬스토리지에 저장한다.
+        // localStorage.setItem('nickname', data.data); //로그인 성공시 닉네임을 로컬스토리지에 저장한다.
         //각 페이지마다 통신해서 닉네임, 이메일 각각 얻어오는중 -> 전역상태 라이브러리 사용해서 컴포넌트 관계 구현하기!?
+        dispatch(loginSuccess(email, data.data)); //data.data에 닉네임저장 
+        // console.log(data)
         alert('로그인 성공!');
         navigate('/news'); //
       } else {
-        alert('로그인 실패!');
+        alert('로그인 실패!: ', data.message);
       }
       // window.location.href = '/news';
     } catch (error) {
