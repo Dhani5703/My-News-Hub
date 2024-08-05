@@ -1,14 +1,44 @@
 .news-search {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin: 50px 4px;
   }
   
-  .news-search input[type="date"],
+  .news-search input[type="date"]{
+    width: 15%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;  
+  }
+
   .news-search input[type="text"] {
-    margin-right: 10px;
+    width: 60%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+  }
+
+  .search-button {
+    background-color: #000000; /* 버튼 배경색 */
+    color: white; /* 버튼 텍스트 색 */
+    width: 10%;
+    /* border: 1px solid; */
+    padding: 5px; 
+    margin: 10px;
+    margin-left: 10px;
+    font-size: 13px; 
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 커서 모양 */
+    transition: background-color 0.3s; /* 배경색 전환 효과 */
   }
   
+  .search-button:hover {
+    background-color: #0056b3; /* 호버 시 배경색 */
+  }
+  
+
   .news-list {
     display: flex;
     flex-wrap: wrap;
@@ -16,8 +46,8 @@
   }
   
   .news-item {
-    width: 300px;
-    margin: 10px;
+    width: 270px;
+    margin: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -28,18 +58,45 @@
     height: auto;
   }
   
-  .pagination {
+  .news-container .pagination {
+    width: 40%;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+
+    position: absolute;
+    /*absolute를 쓰면 하단 margin 화면에 안보임, 안쓰면 가운데 정렬이 안됨*/
+    left: 25%;
+    margin: 30px 20px ;
+    padding: 10px;
   }
   
-  .pagination button {
-    margin: 0 5px;
-    padding: 5px 10px;
+ .pagination-button {
+    background-color: #ffff;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
   
+  button {
+    background-color: #ffff;
+    width: 100%;
+    padding: 5px;
+    margin: 0px 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pagination button:disabled {
+    cursor: not-allowed;
+  }
+
   .pagination .active {
+    background-color: #ccc;
     font-weight: bold;
   }
   
