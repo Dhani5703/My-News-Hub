@@ -1,6 +1,12 @@
-import { createStore } from 'redux';
-import rootReducer from './reducers';
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './reducers/userReducer';
+import searchReducer from './reducers/searchReducer';
 
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: {
+    user: userReducer,
+    search: searchReducer,
+  },
+});
 
 export default store;

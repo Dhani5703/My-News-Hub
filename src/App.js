@@ -7,6 +7,7 @@ import store from './store';
 import Login from './pages/Login';
 import Layout from './components/Layout';
 import News from './pages/News';
+// import Header from './components/Header';
 
 const App = () => {
   return (

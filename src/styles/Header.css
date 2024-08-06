@@ -1,18 +1,20 @@
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 0 20px;
+    padding: 10 20px;
     background-color: #f0f0f0;
     border-bottom: 1px solid #ccc;
     height: 60px;
   }
   
+  .header .logo {
+    max-width: 200px;
+  }
+
   .header .logo img {
-    max-width: 100px;
     margin-top: 30px;
     margin-left: 5px;
-    /* height: 40px; */
   }
   
   .header .user-info {
@@ -38,4 +40,36 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s; /* 배경색 전환 효과 */
   }
+
+  .header button:hover {
+    background-color: #ccc; /* 호버 시 배경색 */
+  }
+  
+
+  .search-form input[type="text"] {
+    width: 500px;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+  }
+
+  .search-form button {
+    background-color: #000000; /* 버튼 배경색 */
+    color: white; /* 버튼 텍스트 색 */
+    width: 70px;
+    /* border: 1px solid; */
+    padding: 5px; 
+    margin: 10px;
+    font-size: 13px; 
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 커서 모양 */
+    transition: background-color 0.3s; /* 배경색 전환 효과 */
+  }
+  
+  .search-form button:hover {
+    background-color: #0056b3; /* 호버 시 배경색 */
+  }
+  

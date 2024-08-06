@@ -1,10 +1,12 @@
 import { createStore, combineReducers } from 'redux';
 import searchReducer from './reducers/searchReducer';
-import userReducer from './reducers/userReducer'; // 기존 사용자 리듀서
+import userReducer from './reducers/userReducer';
 
 const rootReducer = combineReducers({
   search: searchReducer,
   user: userReducer,
 });
 
-export const store = createStore(rootReducer);
+const store = createStore(rootReducer);
+
+export default store;
