@@ -5,18 +5,19 @@
     padding: 10 20px;
     background-color: #f0f0f0;
     border-bottom: 1px solid #ccc;
-    height: 60px;
+    height: 70px;
   }
   
-  .header .logo {
-    max-width: 200px;
+  /* .header .logo {
+    padding: 10px;
   }
 
   .header .logo img {
-    margin-top: 30px;
-    margin-left: 5px;
+    max-width: 180px;
+    margin-top: 40px;
+    margin-left: 10px;
   }
-  
+   */
   .header .user-info {
     display: flex;
     align-items: center;
@@ -47,11 +48,24 @@
     background-color: #ccc; /* 호버 시 배경색 */
   }
   
+  .search-form {
+    display: flex;
+    justify-content: center;
+    margin: 50px 4px;
+  }
+
+  .search-form input[type="date"]{
+    width: 15%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;  
+  }
 
   .search-form input[type="text"] {
     width: 500px;
     margin: 10px;
-    padding: 15px;
+    padding: 5px;
     border: 1px solid #000000;
     border-radius: 5px;
   }
@@ -59,7 +73,8 @@
   .search-form button {
     background-color: #000000; /* 버튼 배경색 */
     color: white; /* 버튼 텍스트 색 */
-    width: 70px;
+    width: 60px;
+    height: 40px;
     /* border: 1px solid; */
     padding: 5px; 
     margin: 10px;
@@ -68,7 +83,8 @@
     cursor: pointer; /* 커서 모양 */
     transition: background-color 0.3s; /* 배경색 전환 효과 */
   }
-  
+
+
   .search-form button:hover {
     background-color: #0056b3; /* 호버 시 배경색 */
   }

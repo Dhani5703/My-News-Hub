@@ -3,7 +3,9 @@ export const loginSuccess = (username, nickname) => ({
     payload: { username, nickname },
   });
   
-  export const logout = () => ({
-    type: 'LOGOUT',
-  });
+  export const logout = () => (dispatch) => {
+    dispatch({
+      type: 'LOGOUT',
+    });
+  };
   

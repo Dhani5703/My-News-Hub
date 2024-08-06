@@ -14,7 +14,10 @@ const initialState = {
           isLoggedIn: true,
         };
       case 'LOGOUT':
-        return initialState;
+        return {
+          ...state,
+          nickname: '',
+        };
       default:
         return state;
     }

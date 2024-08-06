@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store/actions/userActions';
 import { setSearchQuery } from '../store/actions/searchActions'; // 검색 액션 추가
-import logo from '../../src/assets/logo.png';
+// import logo from '../../src/assets/logo.png';
 import '../../src/styles/Header.css';
+import { format, subDays } from 'date-fns'; // 날짜 처리를 위해 date-fns 사용
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const nickname = useSelector((state) => state.user.nickname);
   const searchQuery = useSelector((state) => state.search.searchQuery); // 검색어를 가져옴
+  const searchDate = useSelector((state) => state.search.searchDate);
   const [query, setQuery] = React.useState(searchQuery); // 입력 상태
+  const [date, setDate] = React.useState(searchDate || format(subDays(new Date(), 1), 'yyyy-MM-dd'));
+
+  useEffect(() => { // 로그인 상태 확인, 닉네임 없을 시 login
+    if (!nickname) {
+      navigate('/login');
+    }
+  }, [nickname, navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('savedUsername');
@@ -20,7 +29,11 @@ const Header = () => {
   };
 
   const handleSearchChange = (e) => {
-    setQuery(e.target.value); // 검색어 작성 (검색어 한글자씩 업데이트 될 때마다 호출 되는거 수정)
+    setQuery(e.target.value); // 검색어 작성 (검색어 한글자씩 업데이트 될 때마다 호출 되는 현상 수정)
+  };
+
+  const handleDateChange = (e) => {
+    setDate(e.target.value);
   };
 
   const handleSearchSubmit = (e) => {
@@ -35,15 +48,20 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="logo">
+      {/* <div className="logo">
         <img src={logo} alt="로고" />
-      </div>
+      </div> */}
       <form className="search-form" onSubmit={handleSearchSubmit}>
+      <input
+          type="date"
+          value={date}
+          onChange={handleDateChange}
+        />        
         <input
           type="text"
           value={query}
           onChange={handleSearchChange}
-          placeholder="Search"
+          placeholder="검색어를 입력하세요."
         />
         <button type="submit">Search</button>
       </form>

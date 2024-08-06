@@ -1,4 +1,4 @@
-.news-search {
+/* .news-search {
     display: flex;
     justify-content: center;
     margin: 50px 4px;
@@ -21,22 +21,22 @@
   }
 
   .search-button {
-    background-color: #000000; /* 버튼 배경색 */
-    color: white; /* 버튼 텍스트 색 */
+    background-color: #000000; /* 버튼 배경색 
+    color: white; /* 버튼 텍스트 색 
     width: 10%;
-    /* border: 1px solid; */
+    /* border: 1px solid; 
     padding: 5px; 
     margin: 10px;
     margin-left: 10px;
     font-size: 13px; 
-    border-radius: 5px; /* 둥근 모서리 */
-    cursor: pointer; /* 커서 모양 */
-    transition: background-color 0.3s; /* 배경색 전환 효과 */
+    border-radius: 5px; /* 둥근 모서리 
+    cursor: pointer; /* 커서 모양 
+    transition: background-color 0.3s; /* 배경색 전환 효과 
   }
   
   .search-button:hover {
-    background-color: #0056b3; /* 호버 시 배경색 */
-  }
+    background-color: #0056b3; /* 호버 시 배경색 
+  } */
   
 
   .news-list {
@@ -58,6 +58,16 @@
     height: auto;
   }
   
+  /* News.css */
+  .no-image {
+   background-color: #f0f0f0;
+   color: #aaa;
+   padding: 10px;
+    text-align: center;
+   font-style: italic;
+  }
+
+
   .news-container .pagination {
     width: 40%;
     display: flex;
