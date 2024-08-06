@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store/actions/userActions';
-import { setSearchQuery } from '../store/actions/searchActions'; // 검색 액션 추가
-// import logo from '../../src/assets/logo.png';
+import { logout, fetchUserNickname, setUser } from '../store/actions/userActions';
+import { setSearchQuery, setSearchDate } from '../store/actions/searchActions'; // 검색 액션 추가
 import '../../src/styles/Header.css';
 import { format, subDays } from 'date-fns'; // 날짜 처리를 위해 date-fns 사용
 
@@ -16,14 +15,23 @@ const Header = () => {
   const [query, setQuery] = React.useState(searchQuery); // 입력 상태
   const [date, setDate] = React.useState(searchDate || format(subDays(new Date(), 1), 'yyyy-MM-dd'));
 
-  useEffect(() => { // 로그인 상태 확인, 닉네임 없을 시 login
-    if (!nickname) {
+  useEffect(() => {
+    const savedNickname = localStorage.getItem('savedNickname');
+    if (savedNickname) {
+      dispatch(setUser(savedNickname));
+    } else {
+      dispatch(fetchUserNickname());
+    }
+  }, [dispatch]);
+  
+  useEffect(() => { 
+    if (!nickname) { // 로그인 상태 확인, 닉네임 없을 시 loginPage로 이동
       navigate('/login');
     }
   }, [nickname, navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('savedUsername');
+    localStorage.removeItem('savedNickname');
     dispatch(logout());
     navigate('/login');
   };
@@ -34,6 +42,7 @@ const Header = () => {
 
   const handleDateChange = (e) => {
     setDate(e.target.value);
+    dispatch(setSearchDate(e.target.value)); // 날짜가 변경될 때마다 전역 상태 업데이트
   };
 
   const handleSearchSubmit = (e) => {
@@ -43,14 +52,12 @@ const Header = () => {
       return;
     }
     dispatch(setSearchQuery(query)); // 검색 버튼을 눌렀을 때 전송 상태로 설정 searchAction호출
+    // dispatch(setSearchDate(date)); // 검색 날짜 설정
     navigate('/news');
   };
 
   return (
     <header className="header">
-      {/* <div className="logo">
-        <img src={logo} alt="로고" />
-      </div> */}
       <form className="search-form" onSubmit={handleSearchSubmit}>
       <input
           type="date"

@@ -1,5 +1,6 @@
 const initialState = {
-  searchQuery: ''
+  searchQuery: '',
+  searchDate: ''
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         searchQuery: action.payload
+      };
+      case 'SET_SEARCH_DATE':
+      return {
+        ...state,
+        searchDate: action.payload,
       };
     default:
       return state;
