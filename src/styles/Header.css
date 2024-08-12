@@ -8,16 +8,6 @@
     height: 70px;
   }
   
-  /* .header .logo {
-    padding: 10px;
-  }
-
-  .header .logo img {
-    max-width: 180px;
-    margin-top: 40px;
-    margin-left: 10px;
-  }
-   */
   .header .user-info {
     display: flex;
     align-items: center;
@@ -25,14 +15,12 @@
   
   .header .user-info span {
     margin: 10px;
-    display: inline-block; /* span을 블록 요소처럼 동작하게 */
+    display: inline-block; /* span을 블록 요소처럼 동작하게, 한 줄에 위치하게 */
     width: 100px; /* 원하는 가로 길이 */
     white-space: nowrap; /*텍스트가 줄 바꿈되지 않도록 */
   }
   
   .header button {
-    /* padding: 5px 10px; */
-    /* height: 30px; */
     cursor: pointer;
     width: 100%;
     padding: 7px;

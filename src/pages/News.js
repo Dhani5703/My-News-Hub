@@ -1,4 +1,3 @@
-// src/pages/News.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 // import { format, subDays } from 'date-fns'; // 날짜 처리를 위해 date-fns 사용
@@ -44,7 +43,7 @@ const NewsPage = () => {
       }
     };
 
-    fetchNews(searchQuery, searchDate, page); // 페이지, 날짜 또는 검색어가 변경될 때마다 API 호출
+    fetchNews(searchQuery, searchDate, page); // 페이지, 날짜 또는 검색어가 변경될 때마다 API 호출(ferchNews 함수 호출)
   }, [searchQuery, searchDate, page, apiKey]); // searchQuery 상태도 디펜던시로 추가
 
   const handlePageChange = (newPage) => {

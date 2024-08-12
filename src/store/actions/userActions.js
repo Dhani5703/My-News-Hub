@@ -17,7 +17,7 @@ export const logout = () => ({
 
 export const fetchUserNickname = () => async (dispatch) => {
   try {
-    const response = await axios.get('https://fa6e5082-57ca-4bc2-b453-f9ba3f1bd89c.mock.pstmn.io/api/login'); // 여기에 실제 API 엔드포인트를 입력하세요
+    const response = await axios.get('https://fa6e5082-57ca-4bc2-b453-f9ba3f1bd89c.mock.pstmn.io/api/login'); 
     const nickname = response.data.nickname;
 
     // localStorage.setItem('savedNickname', nickname); // 로컬 스토리지에 저장
