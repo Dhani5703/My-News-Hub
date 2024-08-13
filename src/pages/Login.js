@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../store/actions/userActions';
-// // import { loginUser } from '../store/actions/userActions';
+import { loginUser } from '../store/actions/userActions';
 
 import '../../src/styles/Login.css';
 import logo from '../assets/logo.png'
@@ -37,15 +36,6 @@ const LoginPage = () => {
     setRememberMe(e.target.checked);
     };
 
-  //로그인 제출 시 호출되는 함수
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateEmail(email)) {
-      navigate('/news');
-    } else {
-      alert('이메일 형식이 올바르지 않습니다.');
-    }
-  };
 
   //페이지 로드시 로컬 스토리지에서 이메일 가져오기
   useEffect(() => {
@@ -53,44 +43,19 @@ const LoginPage = () => {
     if(savedEmail) {
       setEmail(savedEmail);
       setRememberMe(true); // 저장된 이메일이 있을 경우 체크박스를 체크 상태로 설정
-    } else {
-      setEmail('') // savedEmail이 없을 경우 email 상태 초기화
     }
   }, []);
 
-  const handleLogin = async () => {
-    // 로그인 요청 보내기
-    try {
-      const response = await fetch('https://fa6e5082-57ca-4bc2-b453-f9ba3f1bd89c.mock.pstmn.io/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if(response.ok){
-        if(rememberMe) {
-          localStorage.setItem('savedEmail',email); //로그인 성공시 아이디를 로컬스토리지에 저장한다.
-        } else {
-          localStorage.removeItem('savedEmail'); // 체크 해제 시 저장된 이메일 삭제
-          setEmail('')
-        }
-        localStorage.setItem('savedNickname',data.data); // 로그인 성공시 닉네임을 로컬스토리지에 저장한다.
-        dispatch(loginSuccess(email, data.data)); //loginSuccess 디스패치
-        alert('로그인 성공!')
-        navigate('/news'); //
+    //로그인 제출 시 호출되는 함수
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (validateEmail(email)) {
+        //로그인요청
+        dispatch(loginUser(email, password, rememberMe, navigate)); //로그인 통신 전역상태로 관리
       } else {
-        alert('로그인 실패!: ', data.message);
+        alert('이메일 형식이 올바르지 않습니다.');
       }
-      // window.location.href = '/news';
-    } catch (error) {
-      alert('로그인중 에러가 발생했습니다.');
-    }
-  };
-
+    };
 
   return (
     <div className="login-container">
@@ -128,7 +93,7 @@ const LoginPage = () => {
             아이디 저장
           </label>
         </div>
-        <button type="submit" onClick={handleLogin} disabled={!email || !password}>로그인</button> {/* 이메일 또는 비밀번호가 비어 있는 경우 로그인 버튼 비활성화 */}
+        <button type="submit" disabled={!email || !password}>로그인</button> {/* 이메일 또는 비밀번호가 비어 있는 경우 로그인 버튼 비활성화 */}
       </form>
     </div>
   );
