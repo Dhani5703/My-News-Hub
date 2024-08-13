@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export const loginSuccess = (username, nickname) => ({
   type: 'LOGIN_SUCCESS',
   payload: { username, nickname },
@@ -14,16 +15,24 @@ export const logout = () => ({
   type: 'LOGOUT',
 });
 
-
-export const fetchUserNickname = () => async (dispatch) => {
+export const loginUser = (email, password) => async (dispatch) => {
   try {
-    const response = await axios.get('https://fa6e5082-57ca-4bc2-b453-f9ba3f1bd89c.mock.pstmn.io/api/login'); 
-    const nickname = response.data.nickname;
+    const response = await axios.post('https://fa6e5082-57ca-4bc2-b453-f9ba3f1bd89c.mock.pstmn.io/api/login', { email, password });
 
-    // localStorage.setItem('savedNickname', nickname); // 로컬 스토리지에 저장
+    if (response.data.success) {
+      const nickname = response.data.nickname; // 로그인 응답에서 닉네임 가져오기
 
-    dispatch(setUser(nickname));
+      localStorage.setItem('savedEmail', email);
+      localStorage.setItem('savedNickname', nickname);
+
+      dispatch(loginSuccess(email, nickname)); // Redux store 업데이트
+    } else {
+      console.error('Login failed:', response.data.message);
+    }
   } catch (error) {
-    console.error('Error fetching user nickname:', error);
+    console.error('Error logging in:', error);
   }
 };
+
+
+

@@ -32,6 +32,7 @@ const NewsPage = () => {
             from: date,
             page: page,
             pageSize: pageSize,
+            order: 'desc'
           }
         });
         setArticles(response.data.articles);
@@ -69,6 +70,13 @@ const NewsPage = () => {
           ))}
         </div>
         <div className="pagination"> {/* 페이지네이션 */}
+          {/* {pageCount > 0 && (
+          <Pagination
+            pageCount={Math.max(1, pageCount - 1)}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
+        )} */}
           <button 
             className="pagination-button"
             onClick={() => handlePageChange(page - 1)} 

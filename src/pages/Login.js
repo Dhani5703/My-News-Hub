@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../store/actions/userActions';
+// // import { loginUser } from '../store/actions/userActions';
 
 import '../../src/styles/Login.css';
 import logo from '../assets/logo.png'
@@ -32,9 +32,9 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
-    // "아이디 저장" 체크박스 상태 변경 시 호출되는 함수
-    const handleRememberMeChange = (e) => {
-      setRememberMe(e.target.checked);
+  // "아이디 저장" 체크박스 상태 변경 시 호출되는 함수
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
     };
 
   //로그인 제출 시 호출되는 함수
@@ -49,10 +49,12 @@ const LoginPage = () => {
 
   //페이지 로드시 로컬 스토리지에서 이메일 가져오기
   useEffect(() => {
-    const savedEmail = localStorage.getItem('email'); //'email'?'savedEmail'?
+    const savedEmail = localStorage.getItem('savedEmail'); //'email'?'savedEmail'?
     if(savedEmail) {
       setEmail(savedEmail);
       setRememberMe(true); // 저장된 이메일이 있을 경우 체크박스를 체크 상태로 설정
+    } else {
+      setEmail('') // savedEmail이 없을 경우 email 상태 초기화
     }
   }, []);
 
@@ -74,9 +76,11 @@ const LoginPage = () => {
           localStorage.setItem('savedEmail',email); //로그인 성공시 아이디를 로컬스토리지에 저장한다.
         } else {
           localStorage.removeItem('savedEmail'); // 체크 해제 시 저장된 이메일 삭제
+          setEmail('')
         }
-        dispatch(loginSuccess(email, data.data)); //data.data에 닉네임저장 
-        alert('로그인 성공!');
+        localStorage.setItem('savedNickname',data.data); // 로그인 성공시 닉네임을 로컬스토리지에 저장한다.
+        dispatch(loginSuccess(email, data.data)); //loginSuccess 디스패치
+        alert('로그인 성공!')
         navigate('/news'); //
       } else {
         alert('로그인 실패!: ', data.message);

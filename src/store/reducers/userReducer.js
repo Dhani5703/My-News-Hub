@@ -19,6 +19,8 @@ const userReducer = (state = initialState, action) => {
       };
     case 'LOGOUT':
       localStorage.removeItem('savedNickname');
+      localStorage.removeItem('email');
+      // localStorage.removeItem('nickname');
       return {
         ...state,
         nickname: '',

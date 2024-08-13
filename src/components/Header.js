@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, fetchUserNickname, setUser } from '../store/actions/userActions';
+import { logout, setUser } from '../store/actions/userActions';
 import { setSearchQuery, setSearchDate } from '../store/actions/searchActions'; // 검색 액션 추가
 import '../../src/styles/Header.css';
 import { format, subDays } from 'date-fns'; // 날짜 처리를 위해 date-fns 사용
@@ -10,7 +10,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const nickname = useSelector((state) => state.user.nickname); //사용자 닉네임을 가져옴(전역상태에서)
+  // const nickname = useSelector((state) => state.user.nickname); //사용자 닉네임을 가져옴(전역상태에서)
+  const nickname = useSelector((state) => state.user.nickname) || localStorage.getItem('savedNickname');
   const searchQuery = useSelector((state) => state.search.searchQuery); // 검색어를 가져옴(전역상태에서)
   const searchDate = useSelector((state) => state.search.searchDate); // 검색 날짜를 가져옴(전역상태에서)
 
@@ -21,9 +22,7 @@ const Header = () => {
     const savedNickname = localStorage.getItem('savedNickname');
     if (savedNickname) {
       dispatch(setUser(savedNickname));
-    } else {
-      dispatch(fetchUserNickname());
-    }
+    } 
   }, [dispatch]);
   
   useEffect(() => { 
@@ -34,6 +33,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('savedNickname');
+    // localStorage.removeItem('nickname');
     dispatch(logout()); //로그아웃 액션 디스패치
     navigate('/login'); //로그인 페이지로 리다이렉트
   };
@@ -54,7 +54,6 @@ const Header = () => {
       return;
     }
     dispatch(setSearchQuery(query)); // 검색 버튼을 눌렀을 때 전송 상태로 설정 searchAction호출, 검색어 상태 Redux에 전역상태 업데이트
-    // dispatch(setSearchDate(date)); // 검색 날짜 설정
     navigate('/news');
   };
 
