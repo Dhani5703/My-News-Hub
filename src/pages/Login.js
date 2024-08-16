@@ -70,8 +70,8 @@ const LoginPage = () => {
             id="email"
             value={email}
             onChange={handleEmailChange}
-            className={!isEmailValid ? 'error' : ''}
-          />
+            className={!isEmailValid ? 'error' : ''} 
+          /> 
           {!isEmailValid && <div className="error-message">이메일 형식이 올바르지 않습니다.</div>} {/* 이메일 유효하지 않은 경우 에러 메시지 표시 */}
         </div>
         <div>
@@ -93,7 +93,7 @@ const LoginPage = () => {
             아이디 저장
           </label>
         </div>
-        <button type="submit" disabled={!email || !password}>로그인</button> {/* 이메일 또는 비밀번호가 비어 있는 경우 로그인 버튼 비활성화 */}
+        <button type="submit" disabled={!email || !password}>로그인</button> {/* 이메일 또는 비밀번호가 비어 있는 경우 로그인 버튼 비활성화 */} 
       </form>
     </div>
   );

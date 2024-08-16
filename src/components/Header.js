@@ -10,16 +10,15 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const nickname = useSelector((state) => state.user.nickname); //사용자 닉네임을 가져옴(전역상태에서)
-  const nickname = useSelector((state) => state.user.nickname) || localStorage.getItem('savedNickname');
+  const nickname = useSelector((state) => state.user.nickname) || localStorage.getItem('savedNickname'); //사용자 닉네임을 가져옴(전역상태에서)
   const searchQuery = useSelector((state) => state.search.searchQuery); // 검색어를 가져옴(전역상태에서)
   const searchDate = useSelector((state) => state.search.searchDate); // 검색 날짜를 가져옴(전역상태에서)
 
-  const [query, setQuery] = React.useState(searchQuery); // 로컬상태에서 현재 입력중인 검색어를 관리.
+  const [query, setQuery] = React.useState(searchQuery || ''); // 로컬상태에서 현재 입력중인 검색어를 관리.
   const [date, setDate] = React.useState(searchDate || format(subDays(new Date(), 1), 'yyyy-MM-dd')); // 로컬상태에서 현재 입력중인 날짜를 관리.
 
   useEffect(() => {
-    const savedNickname = localStorage.getItem('savedNickname');
+    const savedNickname = localStorage.getItem('savedNickname'); //닉네임 가져오기
     if (savedNickname) {
       dispatch(setUser(savedNickname));
     } 
@@ -32,8 +31,7 @@ const Header = () => {
   }, [nickname, navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('savedNickname');
-    // localStorage.removeItem('nickname');
+    localStorage.removeItem('savedNickname'); //로그아웃시 savedNickname삭제
     dispatch(logout()); //로그아웃 액션 디스패치
     navigate('/login'); //로그인 페이지로 리다이렉트
   };
@@ -44,15 +42,16 @@ const Header = () => {
 
   const handleDateChange = (e) => {
     setDate(e.target.value); //로컬상태 업데이트
-    dispatch(setSearchDate(e.target.value)); // 날짜가 변경될 때마다 전역 상태 업데이트
+    //dispatch(setSearchDate(e.target.value)); // (수정) 날짜 변경 후 검색버튼 눌러야 전역 상태 업데이트
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (!query.trim()) {
-      alert('검색어를 입력하세요.');
-      return;
-    }
+    // if (!query.trim()) {
+    //   alert('검색어를 입력하세요.'); 
+    //   return;
+    // }
+    dispatch(setSearchDate(date)); // 날짜가 변경될 때마다 전역 상태 업데이트
     dispatch(setSearchQuery(query)); // 검색 버튼을 눌렀을 때 전송 상태로 설정 searchAction호출, 검색어 상태 Redux에 전역상태 업데이트
     navigate('/news');
   };

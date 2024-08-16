@@ -28,7 +28,7 @@ export const loginUser = (email, password, rememberMe, navigate) => async (dispa
         localStorage.removeItem('savedEmail');
       }
 
-      localStorage.setItem('savedEmail', email);
+      // localStorage.setItem('savedEmail', email);
       localStorage.setItem('savedNickname', nickname);
       dispatch(loginSuccess(email, nickname)); // Redux store 업데이트
 
