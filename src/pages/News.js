@@ -35,7 +35,14 @@ const NewsPage = () => {
   useEffect(() => {
     dispatch(setSearchQuery('Apple')); // 기본 검색어 설정
     dispatch(setSearchDate(fromDate)); // 기본 날짜 설정
+    // initialPage;
   }, [dispatch, fromDate]); // dispatch를 종속성 배열에 추가
+
+  // 새로운 검색어가 설정될 때 페이지 번호를 1로 초기화
+  useEffect(() => {
+    navigate('?page=1');
+    setPage(1);
+  }, [searchQuery, navigate]);
 
   //[질문] 이런 경우 보통 전역상태에서 API 호출 기능을 관리하는지 궁금합니다! 옮겨보려고 했는데 오류가 많이 떠서 일단 작동되는 버전으로 저장했습니다.
   //console.log(searchDate)

@@ -23,7 +23,7 @@ const LoginPage = () => {
   //이메일 입력 값 변경 시 호출되는 함수
   const handleEmailChange = (e) => {
     setEmail(e.target.value); //이메일 상태 업데이트
-    // setIsEmailValid(validateEmail(e.target.value)); //이메일 유효성 검사 결과 업데이트
+    // setIsEmailValid(validateEmail(e.target.value)); //이메일 유효성 검사 결과 업데이트 -> (수정)
   };
 
   //비밀번호 입력 값 변경 시 호출되는 함수
