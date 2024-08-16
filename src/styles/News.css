@@ -7,22 +7,41 @@
   .news-item {
     width: 270px;
     margin: 20px;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    overflow: hidden; /* 콘텐츠가 박스를 넘지 않도록 설정 */
+    word-wrap: break-all; /* 긴 단어가 줄바꿈 되도록 설정 */
   }
   
   .news-item img {
     max-width: 100%;
     height: auto;
+    margin-bottom: 10px; /* 이미지 아래 여백 설정 */
+  }
+
+  .news-item h3 {
+    font-size: 18px; /* 제목 크기 설정 */
+    margin-bottom: 10px; /* 제목 아래 여백 설정 */
+  }
+  
+  .news-item p {
+    font-size: 14px; /* 본문 텍스트 크기 설정 */
+    line-height: 1.5; /* 줄 간격 설정 */
+    margin-bottom: 10px; /* 본문 텍스트 아래 여백 설정 */
   }
   
   .no-image {
-    background-color: #f0f0f0;
-    color: #aaa;
+    background-color: #f0f0f0; /* 이미지가 없을 때의 배경색 설정 */
+    color: #aaa; 
     padding: 10px;
     text-align: center;
     font-style: italic;
+    height: 100px; /* 이미지 대체 박스 높이 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888; /* 텍스트 색상 설정 */
   }
 
   .pagination-wrapper {

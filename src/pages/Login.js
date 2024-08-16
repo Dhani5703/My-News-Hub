@@ -9,7 +9,7 @@ import logo from '../assets/logo.png'
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  // const [isEmailValid, setIsEmailValid] = useState(true); (수정 email변수로 이메일 유효성 검사하기.)
   const [rememberMe, setRememberMe] = useState(false); // 아이디 저장 체크박스 상태
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
@@ -23,7 +23,7 @@ const LoginPage = () => {
   //이메일 입력 값 변경 시 호출되는 함수
   const handleEmailChange = (e) => {
     setEmail(e.target.value); //이메일 상태 업데이트
-    setIsEmailValid(validateEmail(e.target.value)); //이메일 유효성 검사 결과 업데이트
+    // setIsEmailValid(validateEmail(e.target.value)); //이메일 유효성 검사 결과 업데이트
   };
 
   //비밀번호 입력 값 변경 시 호출되는 함수
@@ -39,7 +39,7 @@ const LoginPage = () => {
 
   //페이지 로드시 로컬 스토리지에서 이메일 가져오기
   useEffect(() => {
-    const savedEmail = localStorage.getItem('savedEmail'); //'email'?'savedEmail'?
+    const savedEmail = localStorage.getItem('savedEmail'); 
     if(savedEmail) {
       setEmail(savedEmail);
       setRememberMe(true); // 저장된 이메일이 있을 경우 체크박스를 체크 상태로 설정
@@ -70,9 +70,11 @@ const LoginPage = () => {
             id="email"
             value={email}
             onChange={handleEmailChange}
-            className={!isEmailValid ? 'error' : ''} 
+            className={!validateEmail(email) ? 'error' : ''} 
           /> 
-          {!isEmailValid && <div className="error-message">이메일 형식이 올바르지 않습니다.</div>} {/* 이메일 유효하지 않은 경우 에러 메시지 표시 */}
+          {!validateEmail(email) && email && (
+            <div className="error-message">이메일 형식이 올바르지 않습니다.</div>
+            )} {/* 이메일 유효하지 않은 경우 에러 메시지 표시 */}
         </div>
         <div>
           <label htmlFor="password">비밀번호</label>

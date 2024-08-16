@@ -22,7 +22,7 @@ const NewsPage = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(initialPage); // 현재 페이지 번호를 저장할 상태 변수
 
-  console.log(page, pageCount)
+  //console.log(page, pageCount)
 
   const searchQuery = useSelector((state) => state.search.searchQuery) || 'Apple'; // Redux에서 검색어 가져오기, searchQuery가 변경될 때만 API를 호출하기
   const searchDate = useSelector((state) => state.search.searchDate) || fromDate; // Redux에서 검색 날짜 가져오기, 없으면 기본 날짜(어제)
@@ -38,7 +38,7 @@ const NewsPage = () => {
   }, [dispatch, fromDate]); // dispatch를 종속성 배열에 추가
 
   //[질문] 이런 경우 보통 전역상태에서 API 호출 기능을 관리하는지 궁금합니다! 옮겨보려고 했는데 오류가 많이 떠서 일단 작동되는 버전으로 저장했습니다.
-  console.log(searchDate)
+  //console.log(searchDate)
   useEffect(() => {
     const fetchNews = async (query, searchDate, page) => {
       try {
@@ -54,7 +54,7 @@ const NewsPage = () => {
             // sortBy: 'publishedAt'
           }
         });
-        console.log(response.data)
+        //console.log(response.data)
         if (response.data.articles.length > 0) {
           setArticles(response.data.articles);
           setPageCount(Math.ceil(response.data.totalResults / pageSize));
@@ -71,27 +71,30 @@ const NewsPage = () => {
     };
 
     fetchNews(searchQuery, searchDate, page); // 페이지, 날짜 또는 검색어가 변경될 때마다 API 호출(ferchNews 함수 호출)
-  }, [searchQuery, searchDate, page]); //
+  }, [searchQuery, searchDate, page]); // apiKey가 변경될 가능성이 없기 때문에 eslint경고를 무시해도 된다.
 
+  useEffect(() => { //page 상태가 변경될 때마다 useEffect를 통해 스크롤을 맨위로 이동하도록 설정
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  }, [page]);
+  
   const handlePageClick = (data) => {
     const selectedPage = data.selected + 1;
     setPage(selectedPage);
     navigate(`?page=${selectedPage}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' }); //페이지 선택 시 스크롤을 맨 위로 이동.
+    //window.scrollTo({ top: 0, behavior: 'smooth' }); 
   };
 
-
   const handleFirstPage = () => {
-    setPage(1);
     navigate('?page=1');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setPage(1);
+    //window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   //[질문] 1페이지가 아닌 페이지에서 검색하면 콘솔에 426에러가 뜨는데, 이유를 모르겠습니다..
   const handleLastPage = () => {
-    setPage(Math.min(pageCount, maxPage)); // 마지막 페이지가 최대 페이지 수 이하로 이동하도록 설정
-    navigate(`?page=${pageCount}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate(`?page=${Math.min(pageCount, maxPage)}`); // 마지막 페이지가 최대 페이지 수 이하로 이동하도록 설정
+    setPage(Math.min(pageCount, maxPage));
+    //window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
