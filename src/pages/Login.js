@@ -60,9 +60,9 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit}>
-        <div className="logo">
+        {/* <div className="logo">
           <img src={logo} alt="로고" />
-        </div>
+        </div> */}
         <div>
           <label htmlFor="email">아이디</label>
           <input
