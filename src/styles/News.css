@@ -98,3 +98,20 @@
   .pagination-button:not(:disabled):hover {
   background-color: #f1f1f1;
   }
+  
+  .feedback-container {
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 버튼 사이에 공간을 배치 */
+    align-items: center; /* 버튼 세로 정렬 */
+    margin-top: 10px; /* 위쪽 여백 추가 */
+  }
+  
+  .feedback-button {
+    margin: 0 5px; /* 버튼 사이의 간격 */
+  }
+  
+  /* 추가적인 스타일을 원한다면 아래와 같이 수정 가능 */
+  .feedback-button:hover {
+    background-color: #f0f0f0; /* 호버 효과 */
+  }
+  

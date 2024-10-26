@@ -1,7 +1,7 @@
 // src/components/Pagination.js
 import React from 'react';
 import ReactPaginate from 'react-paginate';
-import '../styles/Pagination.css';
+// import '../styles/Pagination.css';
 
 const Pagination = ({ pageCount, currentPage, onPageChange }) => {
   return (

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchNews } from '../api';
+import { fetchNews } from '../api/api';
 import NewsList from '../components/NewsList';
 import Pagination from '../components/Pagination';
-import SearchBar from '../components/SearchBar';
 import { setSearchQuery, setSearchDate } from '../store/actions/searchActions';
 import '../styles/News.css';
 
@@ -49,7 +48,6 @@ const NewsPage = () => {
 
   return (
     <div className="news-container">
-      <SearchBar />
       <NewsList articles={articles} />
       <Pagination pageCount={pageCount} currentPage={page} onPageChange={handlePageClick} />
     </div>
